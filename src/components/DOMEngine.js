@@ -98,29 +98,17 @@ function DOMEngine() {
 	};
 
 	this.updateProjectsDOM = () => {
-		console.log(this.projects);
 		this.clearProjectsDOM();
 		this.projects.forEach((project) => {
-			console.log(project);
 			let projectItem = document.createElement("div");
 			projectItem.textContent = project.title;
 			projectItem.classList.add("project-item");
 			this.projectTab.appendChild(projectItem);
 			projectItem.addEventListener("click", () => {
-				// create card function by passing projectItem as param
-				console.log("open project card");
-				console.log(project);
 				this.createProjectCard(project.title, project.dueDate);
 				return projectItem;
 			});
 		});
-
-		// console.log(this.projects);
-		// // // Create a component that will show all Projects
-		// // // loop through projects create these elements and push to projectTab
-		// // let projectCard = document.createElement("div");
-		// // let projectTitle = document.createElement("")
-		// console.log("RUNNNING");
 	};
 	this.createProjectCard = (title, dueDate) => {
 		let card = document.createElement("div");
@@ -136,6 +124,12 @@ function DOMEngine() {
 		expand.textContent = title + " Tasks";
 		expand.addEventListener("click", () => {
 			card.remove();
+			// find project
+			this.projects.forEach((project) => {
+				if (project.title === title) {
+					this.showTask(project);
+				}
+			});
 			// close project card and open new card displaying project tasks
 		});
 		let cardElements = [cardTitle, cardDueDate, expand];
@@ -146,12 +140,16 @@ function DOMEngine() {
 	};
 	this.clearProjectsDOM = () => {
 		let projects = document.querySelectorAll(".project-item");
-		console.log(projects);
 		if (projects.length >= 1) {
 			projects.forEach((project) => {
 				project.remove();
 			});
 		}
+	};
+
+	this.showTask = (project) => {
+		// Successfully pasing project to this function
+		console.log(project);
 	};
 
 	//   create project cards on the hover of project tab
