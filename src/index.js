@@ -1,10 +1,10 @@
 import "./style.css";
-import { DOMEngine } from "./components/DOMEngine";
-const DOM = new DOMEngine();
-DOM.initialize();
-DOM.createProjectObject("test", "tomorrow");
-// DOM.createProjectObject("test", "next Week");
-DOM.updateProjectsDOM();
-// DOM.clearProjectsDOM();
-// DOM.clearProjectsDOM();
-// DOM.updateProjectsDOM();
+import { DOM } from "./components/DOM";
+import { Task } from "./components/Task";
+import { Project } from "./components/Project";
+let newDOM = new DOM();
+newDOM.initialize();
+
+let project = new Project("Clean House", "3/22/2022", null);
+project.createCard();
+console.log(project);

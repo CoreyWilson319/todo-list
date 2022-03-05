@@ -1,10 +1,12 @@
 import { Task } from "./Task.js";
-function Project(title, dueDate) {
+function Project(title, dueDate, element) {
 	this.title = title;
 	this.dueDate = dueDate;
 	this.tasks = [];
 	this.completed = false;
 	this.overDue = false;
+	this.element = element;
+	this.cardElement = null;
 	this.addTask = (title, description, dueDate, priority) => {
 		let newTask = new Task(title, description, dueDate, priority);
 		this.tasks.push(newTask);
@@ -17,18 +19,25 @@ function Project(title, dueDate) {
 		}
 		return this.tasks;
 	};
-	this.completeProject = () => {
-		this.false = true;
-	};
-	this.projectOverDue = () => {
-		this.overDue = true;
-	};
-	this.getTask = (title) => {
-		for (let i = 0; i < this.tasks.length; i++) {
-			if (this.tasks[i].title === title) {
-				return this.tasks[i];
-			}
-		}
+	this.createCard = () => {
+		let card = document.createElement("div");
+		card.classList.add("project-card");
+		let title = document.createElement("div");
+		title.classList.add("project-card-title");
+		title.textContent = this.title;
+		title.classList.add("project-card-title");
+		let dueDate = document.createElement("div");
+		dueDate.classList.add("project-card-dueDate");
+		dueDate.textContent = this.dueDate;
+		dueDate.classList.add("project-card-dueDate");
+		let showTaskButton = document.createElement("button");
+		showTaskButton.classList.add("show-task-button");
+		showTaskButton.textContent = "Show Tasks";
+		let elements = [title, dueDate, showTaskButton];
+		elements.forEach((element) => card.appendChild(element));
+		this.cardElement = card;
+		// console.log(document.querySelector(".sidebar"));
+		document.querySelector(".sidebar").appendChild(this.cardElement);
 	};
 }
 

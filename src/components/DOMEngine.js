@@ -4,29 +4,9 @@ function DOMEngine() {
 	this.projects = [];
 	this.body = document.querySelector("body");
 	this.content = null;
-	this.projectTab = null;
-	this.header = null;
-	this.form = document.querySelector(".newProjectForm");
-
-	this.initialize = () => {
-		this.content = document.createElement("div");
-		this.projectTab = document.createElement("div");
-		this.header = document.createElement("div");
-		this.content.classList.add("content");
-		this.projectTab.classList.add("projectTab");
-		this.header.classList.add("header");
-		let newProjectButton = document.createElement("button");
-		newProjectButton.classList.add("newProjectButton");
-		newProjectButton.textContent = "Create New Project";
-		newProjectButton.addEventListener("click", this.createProjectForm);
-		let elements = [
-			this.content,
-			this.projectTab,
-			this.header,
-			newProjectButton,
-		];
-		elements.forEach((element) => this.body.appendChild(element));
-	};
+	this.sidebar = null;
+	// this.header = null;
+	// this.form = document.querySelector(".newProjectForm");
 
 	this.createLabelAndInput = (labelName, labelClass, inputClass) => {
 		let label = document.createElement("label");
@@ -110,6 +90,7 @@ function DOMEngine() {
 			});
 		});
 	};
+
 	this.createProjectCard = (title, dueDate) => {
 		let card = document.createElement("div");
 		card.classList.add("card-project");
@@ -127,7 +108,7 @@ function DOMEngine() {
 			// find project
 			this.projects.forEach((project) => {
 				if (project.title === title) {
-					this.showTask(project);
+					this.addTask(project);
 				}
 			});
 			// close project card and open new card displaying project tasks
@@ -147,7 +128,7 @@ function DOMEngine() {
 		}
 	};
 
-	this.showTask = (project) => {
+	this.addTask = (project) => {
 		// Successfully pasing project to this function
 		console.log(project);
 	};
